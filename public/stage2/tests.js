@@ -9,9 +9,9 @@ describe('ステージ2（意図した通りに DOM 要素の属性・テキス�
       //
       // ここに以下のコードを記述してください。
       //
-      // var element = document.getElementById('firebrick');
-      // element.textContent = element.textContent + element.textContent;
-      var element = 'change me!';
+      var element = document.getElementById('firebrick');
+      element.textContent = element.textContent + element.textContent;
+      // var element = 'change me!';
 
 
       expect(element).to.have.property(secret('vq'), secret('sveroevpx'));
@@ -24,7 +24,9 @@ describe('ステージ2（意図した通りに DOM 要素の属性・テキス�
 
       // ここにコードを記述してください。
       // 変更した DOM 要素は element 変数に代入してください。
-      var element = 'change me!';
+      var element = document.getElementById('chocolate');
+      element.textContent = element.textContent + element.textContent;
+      // var element = 'change me!';
 
 
       expect(element).to.have.property(secret('vq'), secret('pubpbyngr'));
@@ -40,7 +42,8 @@ describe('ステージ2（意図した通りに DOM 要素の属性・テキス�
 
       // ここにコードを記述してください。
       // 変更した DOM 要素は element 変数に代入してください。
-      var element = 'change me!';
+      var element = document.getElementsByClassName('mediumseagreen')[0];
+      element.style.backgroundColor = 'limegreen';
 
 
       expect(element).to.have.property(
@@ -58,7 +61,9 @@ describe('ステージ2（意図した通りに DOM 要素の属性・テキス�
 
       // ここにコードを記述してください。
       // 変更した DOM 要素は element 変数に代入してください。
-      var element = 'change me!';
+      // var element = 'change me!';
+      var element = document.getElementsByClassName('turquoise')[0];
+      element.style.opacity = '0.5';
 
 
       expect(element).to.have.property(
@@ -76,8 +81,10 @@ describe('ステージ2（意図した通りに DOM 要素の属性・テキス�
 
       // ここにコードを記述してください。
       // 変更した DOM 要素は element 変数に代入してください。
-      var element = 'change me!';
-
+      // var element = 'change me!';
+      var element = document.get
+      var element = document.getElementsByTagName('blockquote')[0];
+      element.style.transform = 'rotate(10deg)';
 
       expect(element).to.have.property(
         secret('gntAnzr'), secret('OYBPXDHBGR'));
@@ -97,7 +104,10 @@ describe('ステージ2（意図した通りに DOM 要素の属性・テキス�
       //
       // なお、上に 20px 移動させる方法は複数ありますが、今回は top 属性を
       // 使う方法を使ってください。
-      var element = 'change me!';
+      // var element = 'change me!';
+      var element = document.querySelector('[data-js-training="blueviolet"]');
+      element.style.position = 'relative';
+      element.style.top = '-20px';
 
 
       expect(element).to.have.deep.property(

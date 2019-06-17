@@ -28,9 +28,6 @@
   "bugs": {
     "url": "https://github.com/mixi-inc/JavaScriptTraining/issues"
   },
-  "engines": {
-    "node": "~4.1.0"
-  },
   "homepage": "https://github.com/mixi-inc/JavaScriptTraining",
   "devDependencies": {
     "body-parser": "1.14.0",

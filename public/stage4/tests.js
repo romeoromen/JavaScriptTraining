@@ -10,10 +10,10 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
       //
       // jQuery じゃない版:
       //
-      // var element = document.getElementById('firebrick');
-      // element.addEventListener('click', function() {
-      //   element.textContent = Number(element.textContent) + 1;
-      // });
+      var element = document.getElementById('firebrick');
+      element.addEventListener('click', function() {
+        element.textContent = Number(element.textContent) + 1;
+      });
       //
       // jQuery 版:
       //
@@ -25,60 +25,74 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
       // ここに上記のどちらかのコードを記述してください。
 
 
-      var firebrick = document.getElementById('firebrick');
-      firebrick.dispatchEvent(createClickEvent());
-      expect(firebrick).to.have.property('textContent', '2');
+      // var firebrick = document.getElementById('firebrick');
+      // firebrick.dispatchEvent(createClickEvent());
+      // expect(firebrick).to.have.property('textContent', '2');
 
-      firebrick.dispatchEvent(createClickEvent());
-      expect(firebrick).to.have.property('textContent', '3');
+      // firebrick.dispatchEvent(createClickEvent());
+      // expect(firebrick).to.have.property('textContent', '3');
     });
 
 
     it('2 番の要素の click イベントで要素内の数字を 1 ずつ小さくできる', function() {
-
       // ここにコードを記述してください。
+      var element = document.getElementById('chocolate');
+      console.log(element);
+      element.addEventListener('click', function() {
+        element.textContent = Number(element.textContent) - 1;
+      })
 
 
-      var chocolate = document.getElementById('chocolate');
-      chocolate.dispatchEvent(createClickEvent());
-      expect(chocolate).to.have.property('textContent', '1');
+      // var chocolate = document.getElementById('chocolate');
+      // chocolate.dispatchEvent(createClickEvent());
+      // expect(chocolate).to.have.property('textContent', '1');
 
-      chocolate.dispatchEvent(createClickEvent());
-      expect(chocolate).to.have.property('textContent', '0');
+      // chocolate.dispatchEvent(createClickEvent());
+      // expect(chocolate).to.have.property('textContent', '0');
     });
 
 
     it('3 番の要素の click イベントで要素を 10 度ずつ回転できる', function() {
 
       // ここにコードを記述してください。
+      var element = document.getElementsByClassName('mediumseagreen')[0];
+      // クリック前の角度を保存しておくと、rotate の中から数字を取り出さなくて
+      // すむので、楽に書くことができます。
+      var angleDegree = 0;
+      element.addEventListener('click', function() {
+        angleDegree += 10;
+        element.style.transform = 'rotate( ' + angleDegree + 'deg)';
+      });
+      // var mediumseagreen = document.querySelector('.mediumseagreen');
+      // mediumseagreen.dispatchEvent(createClickEvent());
+      // expect(mediumseagreen).to.have.deep.property(
+      //   secret('fglyr.genafsbez'), secret('ebgngr(10qrt)'));
 
-
-      var mediumseagreen = document.querySelector('.mediumseagreen');
-      mediumseagreen.dispatchEvent(createClickEvent());
-      expect(mediumseagreen).to.have.deep.property(
-        secret('fglyr.genafsbez'), secret('ebgngr(10qrt)'));
-
-      mediumseagreen.dispatchEvent(createClickEvent());
-      expect(mediumseagreen).to.have.deep.property(
-        secret('fglyr.genafsbez'), secret('ebgngr(20qrt)'));
+      // mediumseagreen.dispatchEvent(createClickEvent());
+      // expect(mediumseagreen).to.have.deep.property(
+      //   secret('fglyr.genafsbez'), secret('ebgngr(20qrt)'));
     });
 
 
     it('4 番の要素を入力された角度に回転できる', function() {
 
       // ここにコードを記述してください。
+      var element = document.getElementsByClassName('turquoise')[0];
+      var turquoiseInput = element.querySelector('input');
+      turquoiseInput.addEventListener('change', function() {
+        var angleDegree = turquoiseInput.value;
+        element.style.transform = 'rotate( ' + angleDegree + 'deg)';
+      })
+      // var turquoise = document.querySelector('.turquoise');
+      // var turquoiseInput = turquoise.querySelector('input');
 
+      // simulateChangeEvent(turquoiseInput, 10);
+      // expect(turquoise).to.have.deep.property(
+      //   secret('fglyr.genafsbez'), secret('ebgngr(10qrt)'));
 
-      var turquoise = document.querySelector('.turquoise');
-      var turquoiseInput = turquoise.querySelector('input');
-
-      simulateChangeEvent(turquoiseInput, 10);
-      expect(turquoise).to.have.deep.property(
-        secret('fglyr.genafsbez'), secret('ebgngr(10qrt)'));
-
-      simulateChangeEvent(turquoiseInput, 20);
-      expect(turquoise).to.have.deep.property(
-        secret('fglyr.genafsbez'), secret('ebgngr(20qrt)'));
+      // simulateChangeEvent(turquoiseInput, 20);
+      // expect(turquoise).to.have.deep.property(
+      //   secret('fglyr.genafsbez'), secret('ebgngr(20qrt)'));
     });
 
 
@@ -92,10 +106,14 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
       //
       // なお、expect(steelblue).to.be.null は上記のテストの要件を満たして
       // いないので、正解ではありません。
-
-      var steelblue = document.querySelector('.steelblue');
-      expect(steelblue).to.have.property('textContent', '5 \uD83D\uDC33');
-      done();
+      document.addEventListener('DOMContentLoaded', function() {
+        var steelblue = document.querySelector('.steelblue');
+        expect(steelblue).to.have.property('textContent', '5 \uD83D\uDC33');
+        done();
+      });
+      // var steelblue = document.querySelector('.steelblue');
+      // expect(steelblue).to.have.property('textContent', '5 \uD83D\uDC33');
+      // done();
     });
   });
 });

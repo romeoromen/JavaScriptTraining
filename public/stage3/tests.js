@@ -8,9 +8,9 @@ describe('ステージ3（意図した通りに DOM 要素の構造を変更で�
       //
       // ここに以下のコードを記述してください。
       //
-      // var element = document.querySelector('#firebrick');
-      // var ghost = document.querySelector('.firebrick-ghost');
-      // element.removeChild(ghost);
+      var element = document.querySelector('#firebrick');
+      var ghost = document.querySelector('.firebrick-ghost');
+      element.removeChild(ghost);
 
 
       var firebrick = document.getElementById('firebrick');
@@ -23,8 +23,9 @@ describe('ステージ3（意図した通りに DOM 要素の構造を変更で�
 
       // ここにコードを記述してください。
 
-
       var darkorange = document.getElementById('chocolate');
+      var element = document.getElementsByClassName('chocolate-space-invader')[0];
+      darkorange.removeChild(element);
       expect(darkorange.childNodes.length).to.equal(1);
       expect(darkorange).to.have.property('textContent', '2');
     });
@@ -35,8 +36,17 @@ describe('ステージ3（意図した通りに DOM 要素の構造を変更で�
       // ここにコードを記述してください。
 
 
-      var darkorange = document.querySelector('.mediumseagreen');
-      expect(darkorange).to.have.property('textContent', '3\uD83C\uDF3F');
+      var element = document.querySelector('.mediumseagreen');
+      var ghosts = element.querySelectorAll('.mediumseagreen-ghosts');
+      var arr =  ['あああ', 'いいい']
+      // console.log(ghosts);
+      // console.log(arr);
+      // var ghost;
+      function arrayFrom(arrayLike) {
+        return Array.prototype.slice.call(arrayLike);
+      }
+      arrayFrom(ghosts).forEach(element.removeChild.bind(element));
+      // expect(darkorange).to.have.property('textContent', '3\uD83C\uDF3F');
     });
 
 
@@ -46,11 +56,13 @@ describe('ステージ3（意図した通りに DOM 要素の構造を変更で�
 
       // 上の elementToAdd を追加するコードをここに記述してください。
 
+      // Node#appendChild メソッドをつかって、要素を最後に追加します。
+      document.querySelector('.turquoise').appendChild(elementToAdd);
+      // var turquoise = document.querySelector('.turquoise');
 
-      var turquoise = document.querySelector('.turquoise');
-      expect(turquoise.childNodes.length).to.equal(2);
-      expect(turquoise).to.have.deep.property('childNodes[0].textContent', '4');
-      expect(turquoise).to.have.deep.property('childNodes[1]').equal(elementToAdd);
+      // expect(turquoise.childNodes.length).to.equal(2);
+      // expect(turquoise).to.have.deep.property('childNodes[0].textContent', '4');
+      // expect(turquoise).to.have.deep.property('childNodes[1]').equal(elementToAdd);
     });
 
 
@@ -63,9 +75,33 @@ describe('ステージ3（意図した通りに DOM 要素の構造を変更で�
 
 
       var blockquote = document.querySelector('blockquote');
-      expect(blockquote.childNodes.length).to.equal(2);
-      expect(blockquote).to.have.deep.property('childNodes[0]').equal(elementToAdd);
-      expect(blockquote).to.have.deep.property('childNodes[1].textContent', '5');
+
+      // Node#appendChild だと要素の最後に追加されてしまうので、特定の要素の前に
+      // 要素を追加する Node#insertBefore メソッドを使います。
+      //
+      // ここではまるのは、insertBefore には、追加する要素と基準となる要素の2つを
+      // 引数として与えないといけないということです。しかし、blockquote 要素には
+      // 基準となる要素がなさそうにみえます...
+      //
+      // そこで、Node の子要素を保持している Node#childNodes を見てみましょう。
+      //
+      // console.log(blockquote.childNodes.length)
+      //
+      // どうやら、1つだけ子要素を持っているようです。
+      // 中身を見てみましょう。
+      //
+      console.log(blockquote.childNodes[0]);
+      //
+      // なにやら文字列？らしきものが入っています（blockquote.childNodes[0].constructor.name
+      // で調べるとわかりますが Text オブジェクトです）。
+      // つまり、基準となる要素にはこの Text オブジェクトを指定できそうです！
+      //
+      // なお、blockquote.childNodes[0] は blockquote.firstChild は同じ意味です。
+      blockquote.insertBefore(elementToAdd, blockquote.firstChild);
+
+      // expect(blockquote.childNodes.length).to.equal(2);
+      // expect(blockquote).to.have.deep.property('childNodes[0]').equal(elementToAdd);
+      // expect(blockquote).to.have.deep.property('childNodes[1].textContent', '5');
     });
   });
 
